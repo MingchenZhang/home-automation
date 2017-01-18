@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="common_include">
+        <in>util_address_referer.h</in>
+        <in>util_array_list.h</in>
+        <in>util_debug.h</in>
+        <in>util_tools.h</in>
+      </df>
+      <df name="common_lib">
+      </df>
+      <df name="common_src">
+        <in>util_address_referer.c</in>
+        <in>util_array_list.c</in>
+        <in>util_tools.c</in>
+      </df>
+      <df name="radio_level1_include">
+        <in>radio_level1_broadcastProcess.h</in>
+        <in>radio_level1_control.h</in>
+        <in>radio_level1_forwarding.h</in>
+        <in>radio_level1_gatewayConnector.h</in>
+        <in>radio_level1_init.h</in>
+        <in>radio_level1_localReceive.h</in>
+        <in>radio_level1_rf24Radio.h</in>
+      </df>
+      <df name="radio_level1_lib">
+      </df>
+      <df name="radio_level1_src">
+        <in>radio_level1_broadcastProcess.c</in>
+        <in>radio_level1_control.c</in>
+        <in>radio_level1_forwarding.c</in>
+        <in>radio_level1_gatewayConnector.c</in>
+        <in>radio_level1_init.c</in>
+        <in>radio_level1_localReceive.c</in>
+        <in>radio_level1_rf24Radio.cpp</in>
+      </df>
+      <df name="test">
+        <df name="include">
+          <in>cross_cpp.h</in>
+        </df>
+        <df name="jansson-2.7">
+          <df name="android">
+            <in>jansson_config.h</in>
+          </df>
+          <df name="cmake">
+          </df>
+          <df name="doc">
+            <df name="ext">
+            </df>
+            <in>github_commits.c</in>
+          </df>
+          <df name="src">
+            <df name=".deps">
+            </df>
+            <df name=".libs">
+            </df>
+            <in>dump.c</in>
+            <in>error.c</in>
+            <in>hashtable.c</in>
+            <in>hashtable.h</in>
+            <in>hashtable_seed.c</in>
+            <in>jansson.h</in>
+            <in>jansson_config.h</in>
+            <in>jansson_private.h</in>
+            <in>load.c</in>
+            <in>lookup3.h</in>
+            <in>memory.c</in>
+            <in>pack_unpack.c</in>
+            <in>strbuffer.c</in>
+            <in>strbuffer.h</in>
+            <in>strconv.c</in>
+            <in>utf.c</in>
+            <in>utf.h</in>
+            <in>value.c</in>
+          </df>
+          <df name="test">
+            <df name="bin">
+              <df name=".deps">
+              </df>
+              <in>json_process.c</in>
+            </df>
+            <df name="scripts">
+            </df>
+            <df name="suites">
+              <df name="api">
+                <df name=".deps">
+                </df>
+                <in>test_array.c</in>
+                <in>test_copy.c</in>
+                <in>test_dump.c</in>
+                <in>test_dump_callback.c</in>
+                <in>test_equal.c</in>
+                <in>test_load.c</in>
+                <in>test_load_callback.c</in>
+                <in>test_loadb.c</in>
+                <in>test_memory_funcs.c</in>
+                <in>test_number.c</in>
+                <in>test_object.c</in>
+                <in>test_pack.c</in>
+                <in>test_simple.c</in>
+                <in>test_unpack.c</in>
+                <in>util.h</in>
+              </df>
+              <df name="invalid">
+                <df name="apostrophe">
+                </df>
+                <df name="ascii-unicode-identifier">
+                </df>
+                <df name="brace-comma">
+                </df>
+                <df name="bracket-comma">
+                </df>
+                <df name="bracket-one-comma">
+                </df>
+                <df name="empty">
+                </df>
+                <df name="extra-comma-in-array">
+                </df>
+                <df name="extra-comma-in-multiline-array">
+                </df>
+                <df name="garbage-after-newline">
+                </df>
+                <df name="garbage-at-the-end">
+                </df>
+                <df name="integer-starting-with-zero">
+                </df>
+                <df name="invalid-escape">
+                </df>
+                <df name="invalid-identifier">
+                </df>
+                <df name="invalid-negative-integer">
+                </df>
+                <df name="invalid-negative-real">
+                </df>
+                <df name="invalid-second-surrogate">
+                </df>
+                <df name="lone-open-brace">
+                </df>
+                <df name="lone-open-bracket">
+                </df>
+                <df name="lone-second-surrogate">
+                </df>
+                <df name="minus-sign-without-number">
+                </df>
+                <df name="negative-integer-starting-with-zero">
+                </df>
+                <df name="null">
+                </df>
+                <df name="null-byte-in-object-key">
+                </df>
+                <df name="null-byte-in-string">
+                </df>
+                <df name="null-byte-outside-string">
+                </df>
+                <df name="object-apostrophes">
+                </df>
+                <df name="object-garbage-at-end">
+                </df>
+                <df name="object-in-unterminated-array">
+                </df>
+                <df name="object-no-colon">
+                </df>
+                <df name="object-no-value">
+                </df>
+                <df name="object-unterminated-value">
+                </df>
+                <df name="real-garbage-after-e">
+                </df>
+                <df name="real-negative-overflow">
+                </df>
+                <df name="real-positive-overflow">
+                </df>
+                <df name="real-truncated-at-e">
+                </df>
+                <df name="real-truncated-at-point">
+                </df>
+                <df name="tab-character-in-string">
+                </df>
+                <df name="too-big-negative-integer">
+                </df>
+                <df name="too-big-positive-integer">
+                </df>
+                <df name="truncated-unicode-surrogate">
+                </df>
+                <df name="unicode-identifier">
+                </df>
+                <df name="unterminated-array">
+                </df>
+                <df name="unterminated-array-and-object">
+                </df>
+                <df name="unterminated-empty-key">
+                </df>
+                <df name="unterminated-key">
+                </df>
+                <df name="unterminated-object-and-array">
+                </df>
+                <df name="unterminated-string">
+                </df>
+              </df>
+              <df name="invalid-unicode">
+                <df name="encoded-surrogate-half">
+                </df>
+                <df name="invalid-utf-8-after-backslash">
+                </df>
+                <df name="invalid-utf-8-in-array">
+                </df>
+                <df name="invalid-utf-8-in-bigger-int">
+                </df>
+                <df name="invalid-utf-8-in-escape">
+                </df>
+                <df name="invalid-utf-8-in-exponent">
+                </df>
+                <df name="invalid-utf-8-in-identifier">
+                </df>
+                <df name="invalid-utf-8-in-int">
+                </df>
+                <df name="invalid-utf-8-in-real-after-e">
+                </df>
+                <df name="invalid-utf-8-in-string">
+                </df>
+                <df name="lone-invalid-utf-8">
+                </df>
+                <df name="lone-utf-8-continuation-byte">
+                </df>
+                <df name="not-in-unicode-range">
+                </df>
+                <df name="overlong-3-byte-encoding">
+                </df>
+                <df name="overlong-4-byte-encoding">
+                </df>
+                <df name="overlong-ascii-encoding">
+                </df>
+                <df name="restricted-utf-8">
+                </df>
+                <df name="truncated-utf-8">
+                </df>
+              </df>
+              <df name="valid">
+                <df name="complex-array">
+                </df>
+                <df name="empty-array">
+                </df>
+                <df name="empty-object">
+                </df>
+                <df name="empty-object-in-array">
+                </df>
+                <df name="empty-string">
+                </df>
+                <df name="escaped-utf-control-char">
+                </df>
+                <df name="false">
+                </df>
+                <df name="negative-int">
+                </df>
+                <df name="negative-one">
+                </df>
+                <df name="negative-zero">
+                </df>
+                <df name="null">
+                </df>
+                <df name="one-byte-utf-8">
+                </df>
+                <df name="real-capital-e">
+                </df>
+                <df name="real-capital-e-negative-exponent">
+                </df>
+                <df name="real-capital-e-positive-exponent">
+                </df>
+                <df name="real-exponent">
+                </df>
+                <df name="real-fraction-exponent">
+                </df>
+                <df name="real-negative-exponent">
+                </df>
+                <df name="real-positive-exponent">
+                </df>
+                <df name="real-subnormal-number">
+                </df>
+                <df name="real-underflow">
+                </df>
+                <df name="short-string">
+                </df>
+                <df name="simple-ascii-string">
+                </df>
+                <df name="simple-int-0">
+                </df>
+                <df name="simple-int-1">
+                </df>
+                <df name="simple-int-123">
+                </df>
+                <df name="simple-object">
+                </df>
+                <df name="simple-real">
+                </df>
+                <df name="string-escapes">
+                </df>
+                <df name="three-byte-utf-8">
+                </df>
+                <df name="true">
+                </df>
+                <df name="two-byte-utf-8">
+                </df>
+                <df name="utf-8-string">
+                </df>
+                <df name="utf-surrogate-four-byte-encoding">
+                </df>
+              </df>
+            </df>
+          </df>
+          <in>jansson_private_config.h</in>
+        </df>
+        <df name="RF24">
+          <df name="examples">
+            <df name="GettingStarted">
+            </df>
+            <df name="GettingStarted_CallResponse">
+            </df>
+            <df name="GettingStarted_HandlingData">
+            </df>
+            <df name="pingpair_ack">
+            </df>
+            <df name="pingpair_dyn">
+            </df>
+            <df name="pingpair_irq">
+            </df>
+            <df name="pingpair_irq_simple">
+            </df>
+            <df name="pingpair_multi_dyn">
+            </df>
+            <df name="pingpair_sleepy">
+            </df>
+            <df name="rf24_ATTiny">
+              <df name="rf24ping85">
+              </df>
+              <df name="timingSearch3pin">
+              </df>
+            </df>
+            <df name="scanner">
+              <df name="output">
+                <in>scanner.cpp</in>
+              </df>
+            </df>
+            <df name="starping">
+            </df>
+            <df name="Transfer">
+            </df>
+            <df name="TransferTimeouts">
+            </df>
+            <df name="Usage">
+              <df name="led_remote">
+              </df>
+              <df name="nordic_fob">
+              </df>
+              <df name="pingpair_maple">
+                <in>main.cpp</in>
+              </df>
+            </df>
+          </df>
+          <df name="examples_linux">
+            <df name="extra">
+              <in>rpi-hub.cpp</in>
+              <in>scanner.cpp</in>
+            </df>
+            <df name="interrupts">
+              <in>gettingstarted_call_response_int.cpp</in>
+              <in>gettingstarted_call_response_int2.cpp</in>
+              <in>pingpair_dyn_int.cpp</in>
+              <in>transfer_interrupt.cpp</in>
+            </df>
+            <in>gettingstarted.cpp</in>
+            <in>gettingstarted_call_response.cpp</in>
+            <in>pingpair_dyn.cpp</in>
+            <in>transfer.cpp</in>
+          </df>
+          <df name="pyRF24">
+            <in>pyRF24.cpp</in>
+          </df>
+          <df name="tests">
+            <df name="native">
+              <in>printf.h</in>
+            </df>
+            <df name="pingpair_blocking">
+              <in>printf.h</in>
+            </df>
+            <df name="pingpair_test">
+              <in>printf.h</in>
+            </df>
+          </df>
+          <df name="utility">
+            <df name="ATTiny">
+              <in>RF24_arch_config.h</in>
+              <in>spi.h</in>
+            </df>
+            <df name="ATXMegaD3">
+              <in>RF24_arch_config.h</in>
+              <in>compatibility.c</in>
+              <in>compatibility.h</in>
+              <in>gpio.cpp</in>
+              <in>gpio.h</in>
+              <in>gpio_helper.c</in>
+              <in>gpio_helper.h</in>
+              <in>includes.h</in>
+              <in>spi.cpp</in>
+              <in>spi.h</in>
+            </df>
+            <df name="Due">
+              <in>RF24_arch_config.h</in>
+            </df>
+            <df name="LittleWire">
+              <in>RF24_arch_config.h</in>
+              <in>includes.h</in>
+            </df>
+            <df name="MRAA">
+              <in>RF24_arch_config.h</in>
+              <in>compatibility.c</in>
+              <in>compatibility.h</in>
+              <in>gpio.cpp</in>
+              <in>gpio.h</in>
+              <in>includes.h</in>
+              <in>spi.cpp</in>
+              <in>spi.h</in>
+            </df>
+            <df name="RPi">
+              <in>RF24_arch_config.h</in>
+              <in>bcm2835.c</in>
+              <in>bcm2835.h</in>
+              <in>includes.h</in>
+              <in>interrupt.c</in>
+              <in>interrupt.h</in>
+              <in>spi.cpp</in>
+              <in>spi.h</in>
+            </df>
+            <df name="SPIDEV">
+              <in>RF24_arch_config.h</in>
+              <in>compatibility.c</in>
+              <in>compatibility.h</in>
+              <in>gpio.cpp</in>
+              <in>gpio.h</in>
+              <in>includes.h</in>
+              <in>interrupt.c</in>
+              <in>interrupt.h</in>
+              <in>spi.cpp</in>
+              <in>spi.h</in>
+            </df>
+            <df name="Teensy">
+              <in>RF24_arch_config.h</in>
+            </df>
+            <df name="Template">
+              <in>RF24_arch_config.h</in>
+              <in>compatibility.h</in>
+              <in>gpio.h</in>
+              <in>includes.h</in>
+              <in>spi.h</in>
+            </df>
+          </df>
+          <in>RF24.cpp</in>
+          <in>RF24.h</in>
+          <in>RF24_config.h</in>
+          <in>nRF24L01.h</in>
+          <in>printf.h</in>
+        </df>
+        <in>cross_c.c</in>
+        <in>cross_cpp.cpp</in>
+        <in>cross_cpp.h</in>
+        <in>noack.cpp</in>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

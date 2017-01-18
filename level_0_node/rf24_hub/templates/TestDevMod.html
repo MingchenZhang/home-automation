@@ -1,0 +1,104 @@
+<div uuid="{{ uuid }}" class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">test title</h3></div>
+    <div class="panel-body">
+        <div class="list-group">
+            <ul class="list-group">
+                <li class="list-group-item">{{online_str}}</li>
+                <li class="list-group-item">current status: {{status_str}}</li>
+            </ul>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default on-button">on</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default off-button">off</button>
+                </div>
+                <script>
+                    on_button = $('[uuid="{{uuid}}"] .on-button');
+                    on_button_timeout = null;
+                    on_button_request = null;
+                    on_button.click(function(){
+                        if(on_button_request != null) on_button_request.abort();
+                        on_button_request = $.ajax({
+                            type: "POST",
+                            url: "/module/{{uuid}}",
+                            data: '{"command": "on"}',
+                            dataType: "json",
+                            timeout: 10000,
+                            success: function(data) {
+                                if(data.result==='success'){
+                                    if(on_button_timeout != null){clearTimeout(on_button_timeout);on_button_timeout=null}
+                                    on_button.attr('class','btn btn-success');
+                                    on_button_timeout = setTimeout(function(){on_button.attr('class','btn btn-default');}, 2000);
+                                }else if(data.result==='no change'){
+                                    if(on_button_timeout != null){clearTimeout(on_button_timeout);on_button_timeout=null}
+                                    on_button.attr('class','btn btn-primary');
+                                    on_button_timeout = setTimeout(function(){on_button.attr('class','btn btn-default');}, 2000);
+                                }else{
+                                    if(on_button_timeout != null){clearTimeout(on_button_timeout);on_button_timeout=null}
+                                    on_button.attr('class','btn btn-danger');
+                                    on_button_timeout = setTimeout(function(){on_button.attr('class','btn btn-default');}, 2000);
+                                }
+                                on_button_request = null;
+                            },
+                            error: function(request, status, err) {
+                                if(status == "timeout") {
+                                    if(on_button_timeout != null){clearTimeout(on_button_timeout);on_button_timeout=null}
+                                    on_button.attr('class','btn btn-warning');
+                                    on_button_timeout = setTimeout(function(){on_button.attr('class','btn btn-default');}, 2000);
+                                }else{
+                                    if(on_button_timeout != null){clearTimeout(on_button_timeout);on_button_timeout=null}
+                                    on_button.attr('class','btn btn-danger');
+                                    on_button_timeout = setTimeout(function(){on_button.attr('class','btn btn-default');}, 2000);
+                                }
+                                on_button_request = null;
+                            }
+                        });
+                    });
+                    off_button = $('[uuid="{{uuid}}"] .off-button');
+                    off_button_timeout = null;
+                    off_button_request = null;
+                    off_button.click(function(){
+                        if(on_button_request != null) off_button_request.abort();
+                        off_button_request = $.ajax({
+                            type: "POST",
+                            url: "/module/{{uuid}}",
+                            data: '{"command": "off"}',
+                            dataType: "json",
+                            timeout: 10000,
+                            success: function(data) {
+                                if(data.result==='success'){
+                                    if(off_button_timeout != null){clearTimeout(off_button_timeout);off_button_timeout=null}
+                                    off_button.attr('class','btn btn-success');
+                                    off_button_timeout = setTimeout(function(){off_button.attr('class','btn btn-default');}, 2000);
+                                }else if(data.result==='no change'){
+                                    if(off_button_timeout != null){clearTimeout(off_button_timeout);off_button_timeout=null}
+                                    off_button.attr('class','btn btn-primary');
+                                    off_button_timeout = setTimeout(function(){off_button.attr('class','btn btn-default');}, 2000);
+                                }else{
+                                    if(off_button_timeout != null){clearTimeout(off_button_timeout);off_button_timeout=null}
+                                    off_button.attr('class','btn btn-danger');
+                                    off_button_timeout = setTimeout(function(){off_button.attr('class','btn btn-default');}, 2000);
+                                }
+                                off_button_request = null;
+                            },
+                            error: function(request, status, err) {
+                                if(status == "timeout") {
+                                    if(off_button_timeout != null){clearTimeout(off_button_timeout);off_button_timeout=null}
+                                    off_button.attr('class','btn btn-warning');
+                                    off_button_timeout = setTimeout(function(){off_button.attr('class','btn btn-default');}, 2000);
+                                }else{
+                                    if(off_button_timeout != null){clearTimeout(off_button_timeout);off_button_timeout=null}
+                                    off_button.attr('class','btn btn-danger');
+                                    off_button_timeout = setTimeout(function(){off_button.attr('class','btn btn-default');}, 2000);
+                                }
+                                off_button_request = null;
+                            }
+                        });
+                    });
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

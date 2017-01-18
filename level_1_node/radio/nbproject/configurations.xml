@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="radio_level1_include">
+        <in>radio_level1_broadcastProcess.h</in>
+        <in>radio_level1_control.h</in>
+        <in>radio_level1_gatewayConnector.h</in>
+        <in>radio_level1_localReceive.h</in>
+      </df>
+      <df name="radio_level1_src">
+        <in>radio_level1_broadcastProcess.c</in>
+        <in>radio_level1_control.c</in>
+        <in>radio_level1_forwarding.c</in>
+        <in>radio_level1_gatewayConnector.c</in>
+        <in>radio_level1_init.c</in>
+        <in>radio_level1_localReceive.c</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>radio_level1_include</pElem>
+              <pElem>common_include</pElem>
+              <pElem>.</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>COLOR</Elem>
+            </preprocessorList>
+          </cTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="radio_level1_include/radio_level1_broadcastProcess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_include/radio_level1_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_include/radio_level1_gatewayConnector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_include/radio_level1_localReceive.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_broadcastProcess.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_control.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_forwarding.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_gatewayConnector.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_init.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="radio_level1_src/radio_level1_localReceive.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

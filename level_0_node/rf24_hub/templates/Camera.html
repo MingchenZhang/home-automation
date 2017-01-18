@@ -1,0 +1,135 @@
+<div uuid="{{ uuid }}" class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">camera</h3></div>
+    <div class="panel-body">
+        <div class="list-group">
+            <ul class="list-group">
+                <li class="list-group-item">{{online_str}}</li>
+                {% if display_control %}
+                <li class="list-group-item preview-image-frame"><img class="img-responsive preview-image"
+                                                                     src="/module/{{uuid}}/current_image"></li>
+                {% end %}
+            </ul>
+            {% if display_control %}
+            <div class="btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group btn-group-vertical" role="group" aria-label="Justified button group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default update-button">update preview image</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                data-target=".camera-continuous-modal">
+                            continuous mode
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% module CommonButtonHandlerUI() %}
+            {% module CameraModuleUI() %}
+            <script>
+                function reload_preview_image(){
+                    new_image = $('<img class="img-responsive preview-image" src="/module/{{uuid}}/current_image?dummy='+Math.random()+'">');
+                    new_image.on('load',function(){
+                        $('[uuid="{{uuid}}"] .preview-image').remove();
+                        $('[uuid="{{uuid}}"] .preview-image-frame').append(new_image);
+                    });
+                }
+
+                function refresh_image_cont_helper(image_frame){
+                    image_frame.last_refresh_request = (new Date()).getTime();
+                    refresh_image_cont(image_frame);
+                }
+                function refresh_image_cont(image_frame){
+                    cont_image_frame.in_refresh = true;
+                    image_frame.new_image = $('<img class="img-responsive image-cont" src="/module/{{uuid}}/current_image?dummy='+Math.random()+'">');
+                    image_frame.new_image.on('load',function(){
+                        image_frame.find('.image-cont').remove();
+                        image_frame.append(image_frame.new_image);
+                        if(image_frame.in_refresh) {
+                            if ((new Date()).getTime() - image_frame.last_refresh_request > 10*1000){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/module/{{uuid}}",
+                                    data: '{"request":"still_continuous_image"}',
+                                    dataType: "json",
+                                    timeout: 10000
+                                });
+                                image_frame.last_refresh_request = (new Date()).getTime();
+                            }
+                            refresh_image_cont(image_frame)
+                        }
+                    });
+                }
+
+                function get_cont_request_command(){
+                    ro_s = $('[uuid="{{uuid}}"].camera-continuous-modal .cont-resolution').val();
+                    qo_s = $('[uuid="{{uuid}}"].camera-continuous-modal .cont-quality').val();
+                    return '{"request":"still_continuous_image","resolution":' + ro_s + ',"quality":' + qo_s + '}'
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .update-button'), '{"request":"still_image"}', '{{uuid}}', reload_preview_image);
+                    cont_image_frame = $('[uuid="{{uuid}}"].camera-continuous-modal .image-cont-frame');
+                    cont_image_frame.in_refresh = false;
+                    attach_common_button_handler($('[uuid="{{uuid}}"].camera-continuous-modal .button-start-cont'), get_cont_request_command, '{{uuid}}', refresh_image_cont_helper, cont_image_frame);
+                    $('[uuid="{{uuid}}"].camera-continuous-modal').on('hidden.bs.modal', function (e) {
+                        cont_image_frame.in_refresh = false;
+                    });
+                }, false);
+            </script>
+            {% end %}
+        </div>
+    </div>
+
+    <!--continuous mode modal-->
+    <div class="modal fade camera-continuous-modal" uuid="{{uuid}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Continuous mode</h4>
+                </div>
+                <div class="modal-body image-cont-frame">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                        data-target="#camera-continuous-modal-control" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">Control</a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="camera-continuous-modal-control">
+                                <form class="navbar-form navbar-left" role="search">
+                                    <select class="form-control cont-resolution">
+                                        <option value="[640,480]" selected="selected">640x480</option>
+                                        <option value="[1296,972]">1296x972</option>
+                                        <option value="[2592,1944]">2592x1944</option>
+                                        <option value="[2592,1944]">2592x1944 (high quality)</option>
+                                    </select>
+                                    <select class="form-control cont-quality">
+                                        <option value="50" selected="selected">50</option>
+                                        <option value="70">70</option>
+                                        <option value="80">80</option>
+                                        <option value="90">90</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <button type="button" class="btn btn-default button-start-cont">Start</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                    <img class="img-responsive image-cont" src="/module/{{uuid}}/current_image">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

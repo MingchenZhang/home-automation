@@ -1,0 +1,94 @@
+<div uuid="{{ uuid }}" class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">switch 2</h3></div>
+    <div class="panel-body">
+        <div class="list-group">
+            <ul class="list-group">
+                <li class="list-group-item">{{online_str}}</li>
+                <li class="list-group-item">switch 1 current status: {{status_1_str}}</li>
+                <li class="list-group-item">switch 2 current status: {{status_2_str}}</li>
+            </ul>
+            {% if display_control %}
+            <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group" role="group"><button type="button" class="btn btn-default on-button-1">turn on switch 1</button></div>
+                <div class="btn-group" role="group"><button type="button" class="btn btn-default off-button-1">turn off switch 1</button></div>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group" role="group"><button type="button" class="btn btn-default on-button-2">turn on switch 2</button></div>
+                <div class="btn-group" role="group"><button type="button" class="btn btn-default off-button-2">turn off switch 2</button></div>
+            </div>
+            <script>
+                function attach_pwm_handler(button, target, selector, uuid_str, attach, success_callback, success_callback_param){
+                    button.button_timeout = null;
+                    button.button_request = null;
+                    button.click(function(){
+                        if(button.button_request != null) button.button_request.abort();
+                        if(typeof button_command === 'function') button_command = button_command(button)
+                        button.button_request = $.ajax({
+                            type: "POST",
+                            url: "/module/" + uuid_str,
+                            data: JSON.stringify({pwm_setting: attach, target: parseInt(target), workload: parseFloat(selector.val())}),
+                            dataType: "json",
+                            timeout: 10000,
+                            success: function(data) {
+                                if(data.result==='pwm setting written'){
+                                    if(button.button_timeout != null){clearTimeout(button.button_timeout);button.button_timeout=null;}
+                                    button.attr('class','btn btn-success');
+                                    button.button_timeout = setTimeout(function(){button.attr('class','btn btn-default');}, 2000);
+                                    if (typeof success_callback_param !== 'undefined') { success_callback(success_callback_param); }
+                                    else{ success_callback(); }
+                                }else{
+                                    if(button.button_timeout != null){clearTimeout(button.button_timeout);button.button_timeout=null;}
+                                    button.attr('class','btn btn-danger');
+                                    button.button_timeout = setTimeout(function(){button.attr('class','btn btn-default');}, 2000);
+                                    $.bootstrapGrowl(data.result, { type: 'danger' });
+                                }
+                                button.button_request = null;
+                            },
+                            error: function(request, status, err) {
+                                if(status == "timeout") {
+                                    if(button.button_timeout != null){clearTimeout(button.button_timeout);button.button_timeout=null;}
+                                    button.attr('class','btn btn-warning');
+                                    button.button_timeout = setTimeout(function(){button.attr('class','btn btn-default');}, 2000);
+                                    $.bootstrapGrowl("server response timeout", { type: 'warning' });
+                                }else{
+                                    if(button.button_timeout != null){clearTimeout(button.button_timeout);button.button_timeout=null;}
+                                    button.attr('class','btn btn-danger');
+                                    button.button_timeout = setTimeout(function(){button.attr('class','btn btn-default');}, 2000);
+                                    $.bootstrapGrowl("unknown server connection error", { type: 'danger' });
+                                }
+                                button.button_request = null;
+                            }
+                        });
+                    });
+                };
+            </script>
+            <form>
+                <div class="form-group">
+                    <select class="form-control switch1-pwm">
+                        <option value="0.0">0%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.8">80%</option>
+                        <option value="1.0">100%</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-default switch1-pwm-bottom">set switch 1 pwm</button>
+                <button type="button" class="btn btn-default switch1-pwm-bottom-off">cancel switch 1 pwm</button>
+            </form>
+            {% module CommonButtonHandlerUI() %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .on-button-1'), '{"command": "on", "target": 1}', '{{uuid}}');
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .on-button-2'), '{"command": "on", "target": 2}', '{{uuid}}');
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .off-button-1'), '{"command": "off", "target": 1}', '{{uuid}}');
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .off-button-2'), '{"command": "off", "target": 2}', '{{uuid}}');
+                    attach_pwm_handler($('[uuid="{{uuid}}"] .switch1-pwm-bottom'), 1, $('[uuid="{{uuid}}"] .switch1-pwm'), '{{uuid}}', true);
+                    attach_pwm_handler($('[uuid="{{uuid}}"] .switch1-pwm-bottom-off'), 1, $('[uuid="{{uuid}}"] .switch1-pwm'), '{{uuid}}', false);
+                }, false);
+            </script>
+            {% end %}
+
+        </div>
+    </div>
+</div>

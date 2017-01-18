@@ -1,0 +1,31 @@
+<div uuid="{{ uuid }}" class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">Door</h3></div>
+    <div class="panel-body">
+        <div class="list-group">
+            <ul class="list-group">
+                <li class="list-group-item">{{online_str}}</li>
+                <li class="list-group-item">inner door current status: {{status_1_str}}</li>
+                <li class="list-group-item">outer door current status: {{status_2_str}}</li>
+            </ul>
+            {% if display_control %}
+            <div class="btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group btn-group-vertical" role="group" aria-label="Justified button group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default on-button-1">unlock inner door</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default on-button-2">unlock outer door</button>
+                    </div>
+                </div>
+            </div>
+            {% module CommonButtonHandlerUI() %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .on-button-1'), '{"command": "on", "target": 1}', '{{uuid}}');
+                    attach_common_button_handler($('[uuid="{{uuid}}"] .on-button-2'), '{"command": "on", "target": 2}', '{{uuid}}');
+                }, false);
+            </script>
+            {% end %}
+        </div>
+    </div>
+</div>

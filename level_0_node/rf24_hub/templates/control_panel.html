@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>home device control</title>
+    <!--<script src="/static/jquery-2.2.4.min.js"></script>-->
+    <!--<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>-->
+    <!--<link rel="stylesheet" href="/static/bootstrap-3.3.6/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--<script src="/static/bootstrap-3.3.6/js/bootstrap.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <!--<link rel="stylesheet" href="/static/control_panel.css">-->
+    <!--<script src="/static/jquery.bootstrap-growl.min.js"></script>-->
+    {% module ControlPanelUICSS() %}
+    <!--dom resources-->
+    {% if user_level == 0 %}
+    <div id="new-user-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create New User</h4>
+                </div>
+                <form action="/new_user" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="new-user-username" class="control-label">User name:</label>
+                            <input type="text" class="form-control" id="new-user-username" name="username"
+                                   onkeydown="if(event.keyCode == 13) $('#new-user-submit').click()">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-user-password" class="control-label">Password:</label>
+                            <input type="text" class="form-control" id="new-user-password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-user-level" class="control-label">User permission level:</label>
+                            <input type="number" class="form-control" id="new-user-level" name="user_level">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-primary" id="new-user-submit">Create New User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% end %}
+    <div id="change-password-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+               <form action="/change_password" method="post">
+                    <div class="modal-body">
+                        <input type="text" name="username" value="{{username}}" style="display:none;">
+                        <div class="form-group">
+                            <label for="change-password-old-pass" class="control-label">Old Password:</label>
+                            <input type="text" class="form-control" id="change-password-old-pass" name="old_password"
+                                   onkeydown="if(event.keyCode == 13) $('#new-user-submit').click()">
+                        </div>
+                        <div class="form-group">
+                            <label for="change-password-new-pass" class="control-label">New Password:</label>
+                            <input type="text" class="form-control" id="change-password-new-pass" name="new_password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--dom resources ends-->
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle login menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">home device control</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            {% if username is None %}
+            <form class="navbar-form navbar-right" action="/login" method="post">
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="User name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+            {% end %}
+            {% if username is not None %}
+            <p class="navbar-text">welcome, {{username}}</p>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user_level == 0 %}
+                <li><a href="#" data-toggle="modal" data-target="#new-user-modal">Create new user</a></li>
+                {% end %}
+                <li><a href="#" data-toggle="modal" data-target="#change-password-modal">change password</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+            {% end %}
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row" id="control-panels">
+        {% for mod in mod_list %}
+        <div class="col-md-4">
+            {{ mod }}
+        </div>
+        {% end %}
+    </div>
+    <hr>
+</div>
+{% module ControlPanelUIJS() %}
+</body>
+</html>

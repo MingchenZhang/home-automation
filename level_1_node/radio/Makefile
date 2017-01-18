@@ -1,0 +1,42 @@
+CC = gcc
+PP = g++
+CFLAGS = -DCOLOR
+
+RADIO1_EXECITABLE = radio_level1
+RADIO1_SRC_DIR = radio_level1_src/
+RADIO1_INCLUDE_DIR = radio_level1_include/
+RADIO1_SRC_C = $(wildcard $(RADIO1_SRC_DIR)*.c)
+RADIO1_SRC_C_OBJS = $(RADIO1_SRC_C:.c=.o)
+RADIO1_SRC_CPP = $(wildcard $(RADIO1_SRC_DIR)*.cpp)
+RADIO1_SRC_CPP_OBJS=$(RADIO1_SRC_CPP:.cpp=.o)
+RADIO1_LIB_DIR = radio_level1_lib/
+RADIO1_LIB_OBJS = $(wildcard $(RADIO1_LIB_DIR)*.o)
+
+COMMON_SRC_DIR = common_src/
+COMMON_INCLUDE_DIR = common_include/
+COMMON_SRC_C = $(wildcard $(COMMON_SRC_DIR)*.c)
+COMMON_SRC_OBJS=$(COMMON_SRC_C:.c=.o)
+COMMON_L= -ljansson
+COMMON_LIB_DIR = common_lib/
+COMMON_LIB_OBJS = $(wildcard $(COMMON_LIB_DIR)*.o)
+
+all: $(RADIO1_EXECITABLE)
+
+debug: CFLAGS += -Wall -Werror -DDEBUG -DRADIO_DETAIL_DISPLAY -g
+debug: all
+
+$(RADIO1_EXECITABLE): $(RADIO1_SRC_C_OBJS) $(RADIO1_SRC_CPP_OBJS) $(RADIO1_LIB_OBJS) $(COMMON_SRC_OBJS) $(COMMON_LIB_OBJS)
+	$(PP) $(CFLAGS) -I $(RADIO1_INCLUDE_DIR) -I $(COMMON_INCLUDE_DIR) $^ -lrf24-bcm -lpthread -lm $(COMMON_L) -o $@
+
+$(RADIO1_SRC_DIR)%.o: $(RADIO1_SRC_DIR)%.c
+	$(CC) $(CFLAGS) -I $(RADIO1_INCLUDE_DIR) -I $(COMMON_INCLUDE_DIR) -c $< -o $@
+
+$(RADIO1_SRC_DIR)%.o: $(RADIO1_SRC_DIR)%.cpp
+	$(PP) $(CFLAGS) -I $(RADIO1_INCLUDE_DIR) -I $(COMMON_INCLUDE_DIR) -c $< -o $@
+
+$(COMMON_SRC_DIR)%.o: $(COMMON_SRC_DIR)%.c
+	$(CC) $(CFLAGS) -I $(COMMON_INCLUDE_DIR) -c $< -o $@
+
+.PHONY: clean
+clean:
+	rm -f $(RADIO1_SRC_C_OBJS) $(RADIO1_SRC_CPP_OBJS) $(RADIO1_EXECITABLE) $(COMMON_SRC_OBJS)

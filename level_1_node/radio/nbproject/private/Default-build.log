@@ -1,0 +1,40 @@
+gcc -DCOLOR -I radio_level1_include/ -I common_include/ -c radio_level1_src/radio_level1_init.c -o radio_level1_src/radio_level1_init.o
+gcc -DCOLOR -I radio_level1_include/ -I common_include/ -c radio_level1_src/radio_level1_forwarding.c -o radio_level1_src/radio_level1_forwarding.o
+In file included from radio_level1_src/radio_level1_forwarding.c:6:0:
+radio_level1_include/radio_level1_forwarding.h:24:10: error: conflicting types for ‘translateAddress’
+ uint64_t translateAddress(char* address5);
+          ^
+radio_level1_include/radio_level1_forwarding.h:21:6: note: previous declaration of ‘translateAddress’ was here
+ void translateAddress(uint64_t address8, char* address5);
+      ^
+radio_level1_src/radio_level1_forwarding.c: In function ‘forwarding_addEntry’:
+radio_level1_src/radio_level1_forwarding.c:27:23: error: too few arguments to function ‘time’
+   newEntry.lastSeen = time();
+                       ^
+In file included from radio_level1_src/radio_level1_forwarding.c:2:0:
+/usr/include/time.h:192:15: note: declared here
+ extern time_t time (time_t *__timer) __THROW;
+               ^
+radio_level1_src/radio_level1_forwarding.c:31:21: error: too few arguments to function ‘time’
+   entry->lastSeen = time();
+                     ^
+In file included from radio_level1_src/radio_level1_forwarding.c:2:0:
+/usr/include/time.h:192:15: note: declared here
+ extern time_t time (time_t *__timer) __THROW;
+               ^
+radio_level1_src/radio_level1_forwarding.c: At top level:
+radio_level1_src/radio_level1_forwarding.c:35:5: error: conflicting types for ‘forwarding_forward’
+ int forwarding_forward(void* rawPacket, size_t packetSize){
+     ^
+In file included from radio_level1_src/radio_level1_forwarding.c:6:0:
+radio_level1_include/radio_level1_forwarding.h:18:6: note: previous declaration of ‘forwarding_forward’ was here
+ void forwarding_forward(uint64_t address);
+      ^
+radio_level1_src/radio_level1_forwarding.c:43:10: error: conflicting types for ‘translateAddress’
+ uint64_t translateAddress(char* address5){
+          ^
+radio_level1_src/radio_level1_forwarding.c:39:6: note: previous definition of ‘translateAddress’ was here
+ void translateAddress(uint64_t address8, char* address5){
+      ^
+Makefile:32: recipe for target 'radio_level1_src/radio_level1_forwarding.o' failed
+make: *** [radio_level1_src/radio_level1_forwarding.o] Error 1
